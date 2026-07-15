@@ -1159,19 +1159,11 @@ function Newsletter() {
 
 /* ---------------- EVENTS ---------------- */
 
-const GOOGLE_CALENDAR_ID = "";
+const GOOGLE_CALENDAR_ID = "ruralbloomhealth@gmail.com";
 const GOOGLE_CALENDAR_BASE_URL = "https://calendar.google.com/calendar/embed";
-const GOOGLE_CALENDAR_LINK = GOOGLE_CALENDAR_ID
-  ? `${GOOGLE_CALENDAR_BASE_URL}?src=${encodeURIComponent(GOOGLE_CALENDAR_ID)}&ctz=America%2FChicago&mode=AGENDA&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=0&showCalendars=0&color=%23A8455A`
-  : "https://calendar.google.com/calendar";
+const GOOGLE_CALENDAR_LINK = `${GOOGLE_CALENDAR_BASE_URL}?src=${encodeURIComponent(GOOGLE_CALENDAR_ID)}&ctz=America%2FChicago`;
 
 function CommunityCalendar() {
-  const sampleEvents = [
-    { month: "AUG", day: "12", title: "Rural Bloom Workshop", detail: "Plain-language symptom tracking and appointment prep." },
-    { month: "SEP", day: "03", title: "Community Health Fair", detail: "Resources, screening information, and printable worksheets." },
-    { month: "SEP", day: "18", title: "Screening Q&A", detail: "A gentle session on what different screenings check for." },
-  ];
-
   return (
     <div className="rb-calendar-shell rb-card rounded-3xl p-6 mb-14">
       <div className="flex flex-wrap items-center justify-between gap-4 mb-5">
@@ -1194,32 +1186,11 @@ function CommunityCalendar() {
         </a>
       </div>
 
-      {GOOGLE_CALENDAR_ID ? (
-        <iframe
-          title="Rural Bloom community calendar"
-          className="rb-calendar-frame shadow-sm"
-          src={GOOGLE_CALENDAR_LINK}
-        />
-      ) : (
-        <div className="rb-calendar-preview rounded-2xl p-6 grid gap-4">
-          {sampleEvents.map((event) => (
-            <div key={`${event.month}-${event.day}`} className="rb-card rounded-2xl p-4 flex gap-4 items-start">
-              <div className="rb-calendar-date">
-                <div className="py-1 text-xs font-bold" style={{ background: COLORS.deep, color: "#fff" }}>{event.month}</div>
-                <div className="py-2 rb-display text-2xl" style={{ color: COLORS.mauve }}>{event.day}</div>
-              </div>
-              <div>
-                <p className="font-bold" style={{ color: COLORS.mauve }}>{event.title}</p>
-                <p className="text-sm leading-relaxed text-neutral-600 mt-1">{event.detail}</p>
-              </div>
-            </div>
-          ))}
-          <p className="text-sm text-neutral-500 leading-relaxed">
-            To connect your live Google Calendar, make the calendar public and paste its calendar ID into
-            <span className="font-bold" style={{ color: COLORS.mauve }}> GOOGLE_CALENDAR_ID</span>.
-          </p>
-        </div>
-      )}
+      <iframe
+        title="Rural Bloom community calendar"
+        className="rb-calendar-frame shadow-sm"
+        src={GOOGLE_CALENDAR_LINK}
+      />
     </div>
   );
 }
