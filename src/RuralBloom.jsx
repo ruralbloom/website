@@ -1173,7 +1173,7 @@ function CommunityCalendar() {
           </span>
           <div>
             <h2 className="rb-display text-2xl" style={{ color: COLORS.mauve }}>Community Calendar</h2>
-            <p className="text-sm text-neutral-500">A pink Google Calendar you can update anytime.</p>
+            <p className="text-sm text-neutral-500">Upcoming Rural Bloom events, workshops, and community dates.</p>
           </div>
         </div>
         <a
