@@ -524,13 +524,13 @@ function PageShell({ title, kicker, children }) {
 
 const NAV_ITEMS = [
   { id: "home", label: "Home" },
-  { id: "about", label: "About the Creator" },
   { id: "resources", label: "Resources" },
   { id: "newsletter", label: "Newsletter" },
   { id: "events", label: "Community Events" },
   { id: "chat", label: "BloomAI" },
   { id: "testimonials", label: "Testimonials" },
   { id: "feedback", label: "Contact Us" },
+  { id: "about", label: "About the Creator" },
 ];
 
 function Logo({ onClick }) {
