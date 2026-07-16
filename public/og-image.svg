@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#FBF3EF"/>
+  <rect x="56" y="56" width="1088" height="518" rx="44" fill="#F3DCE1"/>
+  <circle cx="250" cy="315" r="112" fill="#FBEAEE" stroke="#C98A94" stroke-width="8"/>
+  <g fill="#FBEAEE" stroke="#A8455A" stroke-width="7">
+    <ellipse cx="250" cy="246" rx="18" ry="34"/>
+    <ellipse cx="250" cy="246" rx="18" ry="34" transform="rotate(72 250 315)"/>
+    <ellipse cx="250" cy="246" rx="18" ry="34" transform="rotate(144 250 315)"/>
+    <ellipse cx="250" cy="246" rx="18" ry="34" transform="rotate(216 250 315)"/>
+    <ellipse cx="250" cy="246" rx="18" ry="34" transform="rotate(288 250 315)"/>
+  </g>
+  <circle cx="250" cy="315" r="20" fill="#A8455A" stroke="#FBF3EF" stroke-width="5"/>
+  <text x="410" y="290" fill="#7D5A56" font-family="Georgia, 'Times New Roman', serif" font-size="92" font-weight="700">Rural Bloom</text>
+  <text x="412" y="365" fill="#A8455A" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700">Plain-language women's health education</text>
+  <text x="412" y="420" fill="#4A3B39" font-family="Arial, Helvetica, sans-serif" font-size="30">Resources, events, stories, and body literacy tools.</text>
+</svg>
