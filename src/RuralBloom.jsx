@@ -888,13 +888,6 @@ const TESTIMONIALS = [
   },
 ];
 
-const STORY_PROMPTS = [
-  "What did you learn from Rural Bloom?",
-  "Did the guide help you feel more confident discussing your health?",
-  "What was the most helpful section?",
-  "What topic should be added next?",
-];
-
 function Feedback() {
   const [feedback, setFeedback] = useState({ name: "", email: "", message: "" });
   const [sent, setSent] = useState(false);
@@ -919,10 +912,36 @@ function Feedback() {
   };
   return (
     <PageShell kicker="get in touch" title="Contact Us">
-      <div className="rb-feedback-panel">
-        <p className="mb-5 max-w-2xl leading-relaxed">
-          Send feedback, questions, resource suggestions, or ideas for what Rural Bloom should cover next.
+      <div className="mb-14">
+        <h2 className="rb-display text-2xl mb-3" style={{ color: COLORS.mauve }}>Testimonials</h2>
+        <p className="mb-6 max-w-3xl leading-relaxed">
+          Real questions, real steps toward care, shared by people who've used Rural Bloom.
         </p>
+        <div className="grid md:grid-cols-3 gap-5">
+          {TESTIMONIALS.map((t, i) => (
+            <Reveal key={t.name} delay={i * 120}>
+              <div className="rb-card rounded-2xl p-6 h-full">
+                <Quote size={20} color={COLORS.rose} />
+                <p className="rb-script text-xl mt-2 mb-3" style={{ color: COLORS.mauve }}>"{t.quote}"</p>
+                <p className="text-sm leading-relaxed mb-4">{t.body}</p>
+                <p className="text-sm font-bold" style={{ color: COLORS.deep }}>{t.name}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+
+      <div className="rb-feedback-panel">
+        <div className="mb-5 max-w-3xl leading-relaxed">
+          <p className="mb-3">
+            Send feedback, questions, resource suggestions, or ideas for what Rural Bloom should cover next.
+          </p>
+          <p>
+            You can also share your story here: what you learned from Rural Bloom, whether the guide helped
+            you feel more confident discussing your health, what section was most helpful, or what topic
+            should be added next.
+          </p>
+        </div>
         {sent ? (
           <div className="rb-card rounded-2xl p-6 flex items-center gap-3">
             <Heart color={COLORS.deep} />
@@ -971,35 +990,6 @@ function Feedback() {
             </button>
           </form>
         )}
-      </div>
-      <div className="mt-14">
-        <h2 className="rb-display text-2xl mb-3" style={{ color: COLORS.mauve }}>Testimonials</h2>
-        <p className="mb-6 max-w-3xl leading-relaxed">
-          Real questions, real steps toward care, shared by people who've used Rural Bloom.
-        </p>
-        <div className="grid md:grid-cols-3 gap-5 mb-10">
-          {TESTIMONIALS.map((t, i) => (
-            <Reveal key={t.name} delay={i * 120}>
-              <div className="rb-card rounded-2xl p-6 h-full">
-                <Quote size={20} color={COLORS.rose} />
-                <p className="rb-script text-xl mt-2 mb-3" style={{ color: COLORS.mauve }}>"{t.quote}"</p>
-                <p className="text-sm leading-relaxed mb-4">{t.body}</p>
-                <p className="text-sm font-bold" style={{ color: COLORS.deep }}>{t.name}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-        <div className="rb-story-panel">
-          <h2 className="rb-display text-2xl mb-2" style={{ color: COLORS.mauve }}>Share Your Story</h2>
-          <p className="mb-4 text-sm">You could write about:</p>
-          <ul className="grid sm:grid-cols-2 gap-2 text-sm">
-            {STORY_PROMPTS.map((p, i) => (
-              <li key={i} className="flex items-start gap-2">
-                <span style={{ color: COLORS.deep }}>·</span> {p}
-              </li>
-            ))}
-          </ul>
-        </div>
       </div>
     </PageShell>
   );
