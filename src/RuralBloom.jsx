@@ -302,10 +302,17 @@ const styleTag = `
   }
   .rb-pamphlet-frame {
     width: 100%;
-    min-height: 75vh;
+    min-height: min(78vh, 52rem);
     border: 0;
     border-radius: 1rem;
     background: #fff;
+  }
+  .rb-pamphlet-note {
+    padding: 1rem 1.25rem 1.15rem;
+    color: ${COLORS.mauve};
+    font-family: 'Caveat', cursive;
+    font-size: 1.35rem;
+    line-height: 1.2;
   }
   .rb-nav-link { position: relative; }
   .rb-nav-link.active { color: ${COLORS.deep}; }
@@ -738,6 +745,7 @@ function Home({ setPage }) {
 /* ---------------- PAMPHLET PREVIEW ---------------- */
 
 const PAMPHLET_PDF_URL = `${process.env.PUBLIC_URL}/rural-bloom-pamphlet.pdf`;
+const PAMPHLET_EMBED_URL = `${PAMPHLET_PDF_URL}#page=1&view=Fit&zoom=page-fit`;
 
 function Pamphlet({ setPage }) {
   const sections = [
@@ -780,13 +788,13 @@ function Pamphlet({ setPage }) {
           </a>
         </div>
       </div>
-      <div className="rb-card rounded-2xl p-3 mb-10">
+      <div className="rb-card rounded-2xl overflow-hidden mb-10">
         <iframe
           title="Rural Bloom pamphlet PDF"
           className="rb-pamphlet-frame"
-          src={PAMPHLET_PDF_URL}
+          src={PAMPHLET_EMBED_URL}
         />
-        <p className="text-sm text-neutral-500 mt-3 px-2 pb-1">
+        <p className="rb-pamphlet-note">
           If the pamphlet does not appear, open or download the PDF above.
         </p>
       </div>
