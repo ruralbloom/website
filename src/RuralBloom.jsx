@@ -300,6 +300,13 @@ const styleTag = `
     text-align: center;
     flex-shrink: 0;
   }
+  .rb-pamphlet-frame {
+    width: 100%;
+    min-height: 75vh;
+    border: 0;
+    border-radius: 1rem;
+    background: #fff;
+  }
   .rb-nav-link { position: relative; }
   .rb-nav-link.active { color: ${COLORS.deep}; }
   .rb-nav-link.active::after {
@@ -730,6 +737,8 @@ function Home({ setPage }) {
 
 /* ---------------- PAMPHLET PREVIEW ---------------- */
 
+const PAMPHLET_PDF_URL = `${process.env.PUBLIC_URL}/rural-bloom-pamphlet.pdf`;
+
 function Pamphlet({ setPage }) {
   const sections = [
     { page: "2", title: "Know Your Body", text: "The basic anatomy of the female reproductive system, with body words translated into everyday language." },
@@ -753,12 +762,37 @@ function Pamphlet({ setPage }) {
           <p className="font-bold" style={{ color: COLORS.mauve }}>Download the full pamphlet (PDF)</p>
           <p className="text-sm text-neutral-500">28 pages · free to download and share</p>
         </div>
-        <button
-          className="rb-btn-primary rb-focus px-6 py-3 rounded-full font-bold flex items-center gap-2"
-          onClick={() => alert("Downloads open once the PDF is hosted on the live site.")}
-        >
-          <Download size={18} /> Download PDF
-        </button>
+        <div className="flex flex-wrap gap-3">
+          <a
+            className="rb-btn-primary rb-focus px-6 py-3 rounded-full font-bold flex items-center gap-2"
+            href={PAMPHLET_PDF_URL}
+            download="Rural Bloom Pamphlet.pdf"
+          >
+            <Download size={18} /> Download PDF
+          </a>
+          <a
+            className="rb-btn-secondary rb-focus px-6 py-3 rounded-full font-bold flex items-center gap-2"
+            href={PAMPHLET_PDF_URL}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Open PDF <ExternalLink size={16} />
+          </a>
+        </div>
+      </div>
+      <div className="rb-card rounded-2xl p-3 mb-10">
+        <iframe
+          title="Rural Bloom pamphlet PDF"
+          className="rb-pamphlet-frame"
+          src={PAMPHLET_PDF_URL}
+        />
+        <p className="text-sm text-neutral-500 mt-3 px-2 pb-1">
+          If the pamphlet does not appear, open or download the PDF above.
+        </p>
+      </div>
+      <div className="mb-6">
+        <h2 className="rb-display text-2xl mb-2" style={{ color: COLORS.mauve }}>What's Inside</h2>
+        <p className="text-sm text-neutral-500">A quick guide to the sections included in the full pamphlet.</p>
       </div>
       <div className="grid md:grid-cols-2 gap-5">
         {sections.map((s, i) => (
