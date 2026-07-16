@@ -987,25 +987,25 @@ function Resources({ setPage }) {
                       <span className="rb-resource-icon" aria-hidden="true">
                         <group.icon size={21} />
                       </span>
-                      <span className="flex-1">
-                        <span className="font-bold mb-1 flex items-start justify-between gap-3">
+                      <div className="flex-1 min-w-0">
+                        <div className="font-bold mb-2 flex items-start justify-between gap-3">
                           <span>{item.name}</span>
                           <span className="rb-resource-action" aria-hidden="true">
                             <ExternalLink size={16} />
                           </span>
-                        </span>
-                        <span className="block text-sm leading-relaxed text-neutral-600">{item.note}</span>
-                      </span>
+                        </div>
+                        <p className="text-sm leading-relaxed text-neutral-600">{item.note}</p>
+                      </div>
                     </a>
                   ) : (
                     <div key={j} className="rb-card rb-resource-link rounded-2xl p-5">
                       <span className="rb-resource-icon" aria-hidden="true">
                         <group.icon size={21} />
                       </span>
-                      <span className="flex-1">
-                        <span className="block font-bold mb-1">{item.name}</span>
-                        <span className="block text-sm leading-relaxed text-neutral-600">{item.note}</span>
-                      </span>
+                      <div className="flex-1 min-w-0">
+                        <p className="font-bold mb-2">{item.name}</p>
+                        <p className="text-sm leading-relaxed text-neutral-600">{item.note}</p>
+                      </div>
                     </div>
                   )
                 ))}
