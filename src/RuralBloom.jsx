@@ -538,11 +538,11 @@ function PageShell({ title, kicker, children }) {
 
 const NAV_ITEMS = [
   { id: "home", label: "Home" },
+  { id: "pamphlet", label: "Pamphlet" },
   { id: "resources", label: "Resources" },
   { id: "newsletter", label: "Newsletter" },
   { id: "events", label: "Community Events" },
   { id: "chat", label: "BloomAI" },
-  { id: "testimonials", label: "Testimonials" },
   { id: "feedback", label: "Contact Us" },
   { id: "about", label: "About the Creator" },
 ];
@@ -745,7 +745,6 @@ function Home({ setPage }) {
 /* ---------------- PAMPHLET PREVIEW ---------------- */
 
 const PAMPHLET_PDF_URL = `${process.env.PUBLIC_URL}/rural-bloom-pamphlet.pdf`;
-const PAMPHLET_EMBED_URL = `${PAMPHLET_PDF_URL}#page=1&view=Fit&zoom=page-fit`;
 
 function Pamphlet({ setPage }) {
   const sections = [
@@ -792,7 +791,7 @@ function Pamphlet({ setPage }) {
         <iframe
           title="Rural Bloom pamphlet PDF"
           className="rb-pamphlet-frame"
-          src={PAMPHLET_EMBED_URL}
+          src={PAMPHLET_PDF_URL}
         />
         <p className="rb-pamphlet-note">
           If the pamphlet does not appear, open or download the PDF above.
@@ -871,6 +870,31 @@ function About() {
 
 /* ---------------- CONTACT ---------------- */
 
+const TESTIMONIALS = [
+  {
+    name: "Nina M.",
+    quote: "I thought my period pain was just something I had to deal with.",
+    body: "I did not know what was normal or when pain was worth asking about. Learning the words for my symptoms was hard, but it helped me feel less dramatic and more prepared to keep talking to someone.",
+  },
+  {
+    name: "Sofia R.",
+    quote: "I kept pushing off my appointment because life was too busy.",
+    body: "Between work, family, transportation, and cost, getting care felt like the last thing on my mind. Making a visit and a plan helped me know what to ask and what my next step could be.",
+  },
+  {
+    name: "Maya T.",
+    quote: "I did not know bleeding after menopause should be checked.",
+    body: "I thought it might go away on its own. I learned it should always be discussed with a healthcare provider, even when it doesn't mean cancer.",
+  },
+];
+
+const STORY_PROMPTS = [
+  "What did you learn from Rural Bloom?",
+  "Did the guide help you feel more confident discussing your health?",
+  "What was the most helpful section?",
+  "What topic should be added next?",
+];
+
 function Feedback() {
   const [feedback, setFeedback] = useState({ name: "", email: "", message: "" });
   const [sent, setSent] = useState(false);
@@ -947,6 +971,35 @@ function Feedback() {
             </button>
           </form>
         )}
+      </div>
+      <div className="mt-14">
+        <h2 className="rb-display text-2xl mb-3" style={{ color: COLORS.mauve }}>Testimonials</h2>
+        <p className="mb-6 max-w-3xl leading-relaxed">
+          Real questions, real steps toward care, shared by people who've used Rural Bloom.
+        </p>
+        <div className="grid md:grid-cols-3 gap-5 mb-10">
+          {TESTIMONIALS.map((t, i) => (
+            <Reveal key={t.name} delay={i * 120}>
+              <div className="rb-card rounded-2xl p-6 h-full">
+                <Quote size={20} color={COLORS.rose} />
+                <p className="rb-script text-xl mt-2 mb-3" style={{ color: COLORS.mauve }}>"{t.quote}"</p>
+                <p className="text-sm leading-relaxed mb-4">{t.body}</p>
+                <p className="text-sm font-bold" style={{ color: COLORS.deep }}>{t.name}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+        <div className="rb-story-panel">
+          <h2 className="rb-display text-2xl mb-2" style={{ color: COLORS.mauve }}>Share Your Story</h2>
+          <p className="mb-4 text-sm">You could write about:</p>
+          <ul className="grid sm:grid-cols-2 gap-2 text-sm">
+            {STORY_PROMPTS.map((p, i) => (
+              <li key={i} className="flex items-start gap-2">
+                <span style={{ color: COLORS.deep }}>·</span> {p}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </PageShell>
   );
@@ -1366,130 +1419,6 @@ function HealthAI() {
   );
 }
 
-/* ---------------- TESTIMONIALS ---------------- */
-
-function Testimonials() {
-  const [storyName, setStoryName] = useState("");
-  const [storyEmail, setStoryEmail] = useState("");
-  const [story, setStory] = useState("");
-  const [shared, setShared] = useState(false);
-  const [sending, setSending] = useState(false);
-  const [sendError, setSendError] = useState("");
-  const handleStorySubmit = async (e) => {
-    e.preventDefault();
-    setSending(true);
-    setSendError("");
-    try {
-      await sendRuralBloomEmail("Testimonial", {
-        from_name: storyName || "Anonymous",
-        from_email: storyEmail,
-        message: story,
-      });
-      setShared(true);
-    } catch (error) {
-      setSendError(`EmailJS error: ${getEmailJSError(error)}`);
-    } finally {
-      setSending(false);
-    }
-  };
-  const testimonials = [
-    {
-      quote: "I thought my period pain was just something I had to deal with.",
-      body: "I did not know what was normal or when pain was worth asking about. Learning the words for my symptoms was hard, but it helped me feel less dramatic and more prepared to keep talking to someone.",
-    },
-    {
-      quote: "I kept pushing off my appointment because life was too busy.",
-      body: "Between work, family, transportation, and cost, getting care felt like the last thing on my mind. Making a visit and a plan helped me know what to ask and what my next step could be.",
-    },
-    {
-      quote: "I did not know bleeding after menopause should be checked.",
-      body: "I thought it might go away on its own. I learned it should always be discussed with a healthcare provider, even when it doesn't mean cancer.",
-    },
-  ];
-  const prompts = [
-    "What did you learn from Rural Bloom?",
-    "Did the guide help you feel more confident discussing your health?",
-    "What was the most helpful section?",
-    "What topic should be added next?",
-  ];
-  return (
-    <PageShell kicker="real voices" title="Testimonials">
-      <p className="mb-10 max-w-3xl leading-relaxed">
-        Real questions, real steps toward care, shared by people who've used Rural Bloom. Share
-        your story and remember: you are never alone.
-      </p>
-
-      <div className="grid md:grid-cols-3 gap-5 mb-14">
-        {testimonials.map((t, i) => (
-          <Reveal key={i} delay={i * 140}>
-            <div className="rb-card rounded-2xl p-6 h-full">
-              <Quote size={20} color={COLORS.rose} />
-              <p className="rb-script text-xl mt-2 mb-3" style={{ color: COLORS.mauve }}>"{t.quote}"</p>
-              <p className="text-sm leading-relaxed">{t.body}</p>
-            </div>
-          </Reveal>
-        ))}
-      </div>
-
-      <div className="rb-story-panel">
-        <h2 className="rb-display text-2xl mb-2" style={{ color: COLORS.mauve }}>Share Your Story</h2>
-        <p className="mb-4 text-sm">You could write about:</p>
-        <ul className="mb-5 grid sm:grid-cols-2 gap-2 text-sm">
-          {prompts.map((p, i) => (
-            <li key={i} className="flex items-start gap-2">
-              <span style={{ color: COLORS.deep }}>·</span> {p}
-            </li>
-          ))}
-        </ul>
-        {shared ? (
-          <div className="rb-card rounded-2xl p-6 flex items-center gap-3">
-            <Heart color={COLORS.deep} />
-            <p>Thank you for sharing. Your story matters.</p>
-          </div>
-        ) : (
-          <form className="rb-card rounded-2xl p-6 grid gap-4" onSubmit={handleStorySubmit}>
-            <div className="grid sm:grid-cols-2 gap-4">
-              <input
-                placeholder="Your name (or 'Anonymous')"
-                className="rb-focus px-4 py-3 rounded-xl border"
-                style={{ borderColor: COLORS.blush }}
-                value={storyName}
-                onChange={(e) => setStoryName(e.target.value)}
-              />
-              <input
-                required
-                type="email"
-                placeholder="Your email"
-                className="rb-focus px-4 py-3 rounded-xl border"
-                style={{ borderColor: COLORS.blush }}
-                value={storyEmail}
-                onChange={(e) => setStoryEmail(e.target.value)}
-              />
-            </div>
-            <textarea
-              required
-              placeholder="Your story"
-              rows={5}
-              className="rb-focus px-4 py-3 rounded-xl border resize-none"
-              style={{ borderColor: COLORS.blush }}
-              value={story}
-              onChange={(e) => setStory(e.target.value)}
-            />
-            {sendError && <p className="text-sm font-bold" style={{ color: COLORS.deep }}>{sendError}</p>}
-            <button
-              type="submit"
-              disabled={sending}
-              className="rb-btn-primary rb-focus px-6 py-3 rounded-full font-bold justify-self-start"
-            >
-              {sending ? "Sharing..." : "Share My Story"}
-            </button>
-          </form>
-        )}
-      </div>
-    </PageShell>
-  );
-}
-
 /* ---------------- FOOTER ---------------- */
 
 function Footer({ setPage }) {
@@ -1554,7 +1483,6 @@ export default function RuralBloomSite() {
     newsletter: <Newsletter />,
     events: <Events />,
     chat: <HealthAI />,
-    testimonials: <Testimonials />,
   };
 
   return (
